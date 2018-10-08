@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>Raster Viewer</title>
+
+		<style type="text/css">
+			*{margin:0;padding:0;box-sizing:border-box;vertical-align:middle;}
+
+			@font-face {font-family:'Open Sans';font-style:normal;font-weight:400;
+				src:local('Open Sans Regular'),local('OpenSans-Regular'),url(fonts/open-sans-regular.woff2) format('woff2');
+			}
+			#mapContainer{position:fixed;top:0;bottom:0;left:0;right:0;}
+			#snapshotBtn{position:fixed;bottom:10px;left:10px;padding:4px 8px;}
+		</style>
+
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no"/>
+		<link rel="stylesheet" type="text/css" href="libs/ol.css">
+	</head>
+	<body>
+		<div id="mapContainer">
+		</div>
+		<button id="snapshotBtn" onClick="snapshot()">Snapshot</button>
+	</body>
+   <script src="libs/ol.js"></script>
+	<script type="text/javascript">
+		'use strict';
+
+		const parseDecimal = function(dec){
+			return Number(dec.toFixed(4));
+		};
+
+		const snapshot = function(){
+			//console.log('view:',olMap.getView().getCenter());
+			const center = ol.proj.toLonLat(olMap.getView().getCenter());
+			const zoom = olMap.getView().getZoom();
+
+			window.open('http://13.59.102.115:8080/styles/default/static/'+parseDecimal(center[0])+','+parseDecimal(center[1])+','+zoom+'/'+window.innerWidth+'x'+window.innerHeight+'.jpg','_blank');
+		};
+
+		let olMap = new ol.Map({
+			target: 'mapContainer',
+			layers: [
+				new ol.layer.Tile({
+					//source: new ol.source.OSM()
+					source: new ol.source.XYZ({url:'http://13.59.102.115:8080/styles/default/tiles/256/{z}/{x}/{y}.jpg'})
+				})
+			],
+			view: new ol.View({
+         	center: ol.proj.fromLonLat([2.1833, 41.3833]),
+         	zoom: 6
+         })
+		});
+
+	</script>
+	
+</html>
+
