@@ -45,7 +45,10 @@
 			layers: [
 				new ol.layer.Tile({
 					//source: new ol.source.OSM()
-					source: new ol.source.XYZ({url:'https://raster.tegola.io/styles/default/tiles/256/{z}/{x}/{y}@'+pixelDensity+'x.jpg'})
+					source: new ol.source.XYZ({
+						url:'https://raster.tegola.io/styles/default/tiles/256/{z}/{x}/{y}@'+pixelDensity+'x.jpg',
+						tilePixelRatio: pixelDensity
+					})
 				})
 			],
 			view: new ol.View({
