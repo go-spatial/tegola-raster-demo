@@ -26,6 +26,8 @@
 	<script type="text/javascript">
 		'use strict';
 
+		const pixelDensity = window.devicePixelRatio || 1;
+
 		const parseDecimal = function(dec){
 			return Number(dec.toFixed(4));
 		};
@@ -35,7 +37,7 @@
 			const center = ol.proj.toLonLat(olMap.getView().getCenter());
 			const zoom = olMap.getView().getZoom();
 
-			window.open('https://raster.tegola.io/styles/default/static/'+parseDecimal(center[0])+','+parseDecimal(center[1])+','+zoom+'/'+window.innerWidth+'x'+window.innerHeight+'.jpg','_blank');
+			window.open('https://raster.tegola.io/styles/default/static/'+parseDecimal(center[0])+','+parseDecimal(center[1])+','+zoom+'/'+window.innerWidth+'x'+window.innerHeight+'@'+pixelDensity+'x.jpg','_blank');
 		};
 
 		let olMap = new ol.Map({
@@ -43,7 +45,7 @@
 			layers: [
 				new ol.layer.Tile({
 					//source: new ol.source.OSM()
-					source: new ol.source.XYZ({url:'https://raster.tegola.io/styles/default/tiles/256/{z}/{x}/{y}.jpg'})
+					source: new ol.source.XYZ({url:'https://raster.tegola.io/styles/default/tiles/256/{z}/{x}/{y}@'+pixelDensity+'x.jpg'})
 				})
 			],
 			view: new ol.View({
