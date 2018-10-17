@@ -36,8 +36,11 @@
 			//console.log('view:',olMap.getView().getCenter());
 			const center = ol.proj.toLonLat(olMap.getView().getCenter());
 			const zoom = olMap.getView().getZoom();
-
+			/*
 			window.open('https://raster.tegola.io/styles/default/static/'+parseDecimal(center[0])+','+parseDecimal(center[1])+','+zoom+'/'+window.innerWidth+'x'+window.innerHeight+'@'+pixelDensity+'x.jpg','_blank');
+			*/
+
+			window.open('https://raster.tegola.io/styles/default/static/'+parseDecimal(center[0])+','+parseDecimal(center[1])+','+zoom+'/4096x4096.jpg','_blank');
 		};
 
 		let olMap = new ol.Map({
